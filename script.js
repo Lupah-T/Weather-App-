@@ -1,4 +1,4 @@
-const apiKey = "dafd9b17b13d072e9061ea8fab71e8bd";
+const apiKey = "YOUR_API_KEY";
 const weatherIcon = document.getElementById("weatherIcon");
 const resultDiv = document.getElementById("result");
 const historyList = document.getElementById("history");
