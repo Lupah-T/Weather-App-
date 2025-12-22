@@ -85,8 +85,15 @@ async function fetchForecast(endpoint) {
     displayForecast(dailyData);
 }
 
+let currentTimeInterval = null;
+
 function displayWeather(data) {
     weatherResult.style.display = "block";
+
+    // City Time Logic
+    if (currentTimeInterval) clearInterval(currentTimeInterval);
+    updateCityTime(data.timezone);
+    currentTimeInterval = setInterval(() => updateCityTime(data.timezone), 10000); // Update every 10s
 
     document.getElementById("weatherIcon").src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@4x.png`;
     document.getElementById("temperature").innerText = Math.round(data.main.temp);
@@ -100,6 +107,36 @@ function displayWeather(data) {
     document.getElementById("pressure").innerText = `${data.main.pressure} hPa`;
 
     suggestClothing(data.main.temp, data.weather[0].main);
+}
+
+function updateCityTime(timezoneOffset) {
+    const d = new Date();
+    const localTime = d.getTime();
+    const localOffset = d.getTimezoneOffset() * 60000;
+    const utc = localTime + localOffset;
+    const cityTime = new Date(utc + (1000 * timezoneOffset));
+
+    const hours = cityTime.getHours();
+    const minutes = cityTime.getMinutes().toString().padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const displayHours = hours % 12 || 12;
+
+    document.getElementById("cityTime").innerText = `${displayHours}:${minutes} ${ampm}`;
+
+    const timeOfDay = getTimeOfDayInfo(hours);
+    document.getElementById("timeIcon").innerText = timeOfDay.icon;
+}
+
+function getTimeOfDayInfo(hours) {
+    if (hours >= 5 && hours < 12) {
+        return { period: "Morning", icon: "🌅" };
+    } else if (hours >= 12 && hours < 17) {
+        return { period: "Afternoon", icon: "☀️" };
+    } else if (hours >= 17 && hours < 20) {
+        return { period: "Evening", icon: "🌇" };
+    } else {
+        return { period: "Night", icon: "🌙" };
+    }
 }
 
 function suggestClothing(temp, condition) {
@@ -132,6 +169,7 @@ function suggestClothing(temp, condition) {
 }
 
 function goHome() {
+    if (currentTimeInterval) clearInterval(currentTimeInterval);
     cityInput.value = "";
     weatherResult.style.display = "none";
     forecastContainer.style.display = "none";

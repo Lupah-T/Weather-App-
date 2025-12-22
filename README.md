@@ -6,6 +6,8 @@ A premium, feature-rich weather application with a modern Glassmorphism 2.0 inte
 
 - **Glassmorphism 2.0 Design**: Modern, sleek UI with frosted glass effects and dynamic backgrounds.
 - **Real-time Weather**: Current temperature, conditions, and precise coordinates for any city.
+- **Real-time City Time**: Dynamic local time for any searched city worldwide.
+- **Time-of-day Icons**: Contextual icons (🌅, ☀️, 🌇, 🌙) that update based on the city's local hour.
 - **5-Day Forecast**: Look ahead with accurate weather projections for the next 5 days.
 - **Detailed Stats**: Humidity, wind speed, pressure, and "feels like" temperature.
 - **Smart Clothing Suggestions**: AI-driven advice on what to wear based on current weather conditions.
