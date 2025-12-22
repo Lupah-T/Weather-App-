@@ -1,32 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Weather App</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="container">
-    <h2>🌤 Weather Finder</h2>
+    <div class="container">
+        <div class="header">
+            <button id="homeBtn" class="icon-btn" onclick="goHome()" title="Home">🏠</button>
+            <h2>🌤 Weather App</h2>
+        </div>
 
-    <input type="text" id="city" placeholder="Enter city name...">
-    
-    <div class="btns">
-        <button onclick="getWeather()">Check Weather</button>
-        <button onclick="getMyLocation()">Use My Location</button>
+        <div class="search-box">
+            <input type="text" id="city" placeholder="Search for a city..." autocomplete="off">
+        </div>
+
+        <div class="btns">
+            <button onclick="getWeather()">Check Weather</button>
+            <button onclick="getMyLocation()" class="secondary">My Location</button>
+        </div>
+
+        <div id="loader" class="loader"></div>
+
+        <div id="weatherResult" class="weather-info" style="display: none;">
+            <img id="weatherIcon" class="icon" src="" alt="Weather Icon">
+            <div class="temp-container">
+                <span id="temperature" class="temp">--</span>
+                <span class="unit-toggle" id="unitToggle" onclick="toggleUnits()">°C</span>
+            </div>
+            <div id="cityName" class="city-name">--</div>
+            <div id="coordinates" class="coordinates">--</div>
+            <div id="description" class="description">--</div>
+
+            <div id="clothingSuggestion" class="clothing-box">
+                <span id="clothingIcon">👕</span>
+                <span id="clothingText">Loading suggestion...</span>
+            </div>
+
+            <div class="details-grid">
+                <div class="detail-item">
+                    <span>Feels Like</span>
+                    <b id="feelsLike">--</b>
+                </div>
+                <div class="detail-item">
+                    <span>Humidity</span>
+                    <b id="humidity">--</b>
+                </div>
+                <div class="detail-item">
+                    <span>Wind Speed</span>
+                    <b id="windSpeed">--</b>
+                </div>
+                <div class="detail-item">
+                    <span>Pressure</span>
+                    <b id="pressure">--</b>
+                </div>
+            </div>
+        </div>
+
+        <div id="forecastContainer" class="forecast-container" style="display: none;">
+            <h3>5-Day Forecast</h3>
+            <div id="forecastList" class="forecast-list"></div>
+        </div>
+
+        <div class="history-section">
+            <div class="history-header">
+                <h3>Recent Searches</h3>
+                <button class="clear-btn" onclick="clearHistory()">Clear All</button>
+            </div>
+            <ul id="history"></ul>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2025 Created by LupahTech solutions</p>
+        </footer>
     </div>
 
-    <img id="weatherIcon" class="icon">
-
-    <div id="result" class="result"></div>
-
-    <h3>Search History</h3>
-    <ul id="history"></ul>
-</div>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
-</html>
 
+</html>
